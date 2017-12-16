@@ -1,0 +1,115 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+    <h:head>
+        
+        <f:loadBundle basename="Controlador.mensajes" var="msg"/>
+        <title> <h:outputText value="#{msg.app_title}"  /></title>
+    </h:head>
+    <h:body>
+        <p:growl id="msj" autoUpdate="true" />
+        <h1 align="center">Proyecto Crud</h1>
+        <h:form>
+            
+            <p:panel id="panel1">
+                <h1 align="center">TABLA ESTUDIANTE</h1>
+                <table>
+                    
+                    <td>
+                        <h:panelGrid cellpadding="1" cellspacing="2"  columns="2" id="panelEst">
+                          
+                        <p:outputLabel for="txtCedula" value="Cedula"/>
+                        <p:inputText id="txtCedula" value="#{estudianteBeann.es.cedula}" size="20" required="true"/>
+                        
+                          <p:outputLabel for="txtNombreE" value="Nombres"/>
+                          <p:inputText id="txtNombreE" value="#{estudianteBeann.es.nombre}" size="20"/>
+                        
+                         <p:outputLabel for="txtApell" value="Apellidos"  />
+                         <p:inputText id="txtApell" value="#{estudianteBeann.es.apellidos}" size="20" />
+                         <p:outputLabel for="txtTele" value="Telefono"/>
+                         <p:inputText id="txtTele" value="#{estudianteBeann.es.telefono}" size="20"/>
+                         <p:outputLabel for="txtDire" value="Direccion"/>
+                         <p:inputText id="txtDire" value="#{estudianteBeann.es.direccion}" size="20"/>
+                         <p:outputLabel for="txtEdad" value="Edad"/>
+                         <p:inputText id="txtEdad" value="#{estudianteBeann.es.edad}" size="20"/>
+                         <p:outputLabel for="txtIdCurso" value="IdCurso"/>
+                         <p:inputText id="txtIdCurso" value="#{estudianteBeann.es.idCurso}" size="20"/>
+                         
+                    </h:panelGrid>
+                        <p:panelGrid columns="3" >
+                            <p:commandButton value="Guardar" actionListener="#{estudianteBeann.registrar()}" update="panel1" />
+                            <p:commandButton value="Actualizar" actionListener="#{estudianteBeann.actualizar()}" update="panel1"/>
+                            <p:commandButton value="Eliminar" actionListener="#{estudianteBeann.eliminar()}" update="panel1"/>
+                            <p:commandButton value="Listar" actionListener="#{estudianteBeann.listar()}" update="datata"/>
+                            <p:commandButton value="Limpiar"  process="@none" update="panelEst" actionListener="#{estudianteBeann.listar()}"/>
+                            
+                        </p:panelGrid>
+                    </td>
+                    <td>
+                        
+                        <p:dataTable id="datata" value="#{estudianteBeann.listaest}" var="estudiantes" scrollable="true" scrollHeight="150">
+                            <p:column headerText="Cedula Estudiante">
+                                <p:outputLabel value="#{estudiantes.cedula}"/>
+                            </p:column>
+                            <p:column headerText="Nombres">
+                                <p:outputLabel value="#{estudiantes.nombre}"/>
+                            </p:column>
+                            <p:column headerText="Apellidos">
+                                <p:outputLabel value="#{estudiantes.apellidos}"/>
+                            </p:column>
+                            <p:column headerText="Id Curso">
+                                <p:outputLabel value="#{estudiantes.idCurso}"/>
+                            </p:column>
+                        </p:dataTable>
+                    </td>
+                </table>
+                
+            </p:panel>
+            <p:panel id="panel2">
+                <h1 align="center">TABLA CURSO</h1>
+                <table>
+                    <td>
+                        <h:panelGrid id="panelCur">
+                        <p:outputLabel for="txtCodigo" value="Codigo Curso"/>
+                        <p:inputText id="txtCodigo" value="#{cursoBeann.curso.idCodigo}"/>
+                        
+                         <p:outputLabel for="txtNombre" value="Nombre"/>
+                         <p:inputText id="txtNombre" value="#{cursoBeann.curso.nombre}"/>
+                        
+                         <p:outputLabel for="txtDescripcion" value="Descripción"/>
+                         <p:inputText id="txtDescripcion" value="#{cursoBeann.curso.descripcion}"/>
+                    </h:panelGrid>
+                        <p:panelGrid>
+                            <p:commandButton value="Guardar" actionListener="#{cursoBeann.guardar()}" update="panel2"/>
+                            <p:commandButton value="Actualizar" actionListener="#{cursoBeann.actualizar()}" update="panel2"/>
+                            <p:commandButton value="Eliminar" actionListener="#{cursoBeann.eliminar()}" update="panel2"/>
+                            <p:commandButton value="Listar" actionListener="#{cursoBeann.listar()}" update="dataCurso"/>
+                            <p:commandButton value="Limpiar"  process="@none" update="panelCur" actionListener="#{cursoBeann.reset()}"/>
+                            
+                        </p:panelGrid>
+                        </td>
+                     <td>
+                         
+                         <p:dataTable id="dataCurso" value="#{cursoBeann.listacursos}" var="curso" scrollable="true" scrollHeight="150">
+                            <p:column headerText="Id Curso">
+                                <p:outputLabel value="#{curso.idCodigo}"/>
+                            </p:column>
+                            <p:column headerText="Nombre Curso">
+                                <p:outputLabel value="#{curso.nombre}"/>
+                            </p:column>
+                            <p:column headerText="Descripcion">
+                                <p:outputLabel value="#{curso.descripcion}"/>
+                            </p:column>
+                             
+                        </p:dataTable>
+                           
+                     </td>
+                     </table>
+            </p:panel>
+        </h:form>
+    </h:body>
+</html>
+
